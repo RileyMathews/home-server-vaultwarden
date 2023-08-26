@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  vaultwarden:
+    user: "1000"
+    image: vaultwarden/server:1.29.1
+    container_name: vaultwarden
+    volumes:
+      - /mnt/md0/volumes/vaultwarden/data:/data
+    labels:
+      - traefik.enable=true
+      - traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.rileymathews.com`)
+      - traefik.http.routers.vaultwarden.tls.certresolver=le
