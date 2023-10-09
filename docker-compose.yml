@@ -5,8 +5,13 @@ services:
     user: "1000"
     image: vaultwarden/server:1.29.1
     container_name: vaultwarden
+    restart: unless-stopped
     volumes:
-      - /mnt/md0/volumes/vaultwarden/data:/data
+      - ./data:/data
+    environment:
+      WEBSOCKET_ENABLED: true
+    env_file:
+      - .env.secret
     labels:
       - traefik.enable=true
       - traefik.http.routers.vaultwarden.rule=Host(`vaultwarden.rileymathews.com`)
